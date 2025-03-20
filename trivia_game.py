@@ -58,7 +58,12 @@ def main():
 
     for question_data in trivia_questions:
         question, answer, explanation, *distractors = question_data
-        options = random.sample(distractors, k=min(3, len(distractors))) + [answer]
+        # options = random.sample(distractors, k=min(3, len(distractors))) + [answer]
+        valid_distractors = [d for d in distractors if d]
+        selected_distractors = random.sample(valid_distractors, k=min(3, len(valid_distractors)))
+        options = [answer] + selected_distractors
+        random.shuffle(options)
+
         random.shuffle(options)
 
         print(f"\n{question}")
